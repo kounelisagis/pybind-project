@@ -1,0 +1,19 @@
+[build-system]
+requires = ["scikit-build-core>=0.3.3", "pybind11"]
+build-backend = "scikit_build_core.build"
+
+
+[project]
+name = "pbstring"
+version = "0.1.0"
+description="A minimal example package (with pybind11)"
+readme = "README.md"
+authors = [
+  { name = "Agisilaos Kounelis", email = "kounelisagis@gmail.com" },
+]
+requires-python = ">=3.7"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3 :: Only",
+]
