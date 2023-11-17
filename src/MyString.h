@@ -6,11 +6,12 @@ private:
     char* data;
 
 public:
-    MyString(char* input);
+    MyString(const char* input);
     ~MyString();
+    char* get_data() const;
     int length() const;
-    MyString slice(int start, int end, int step) const;
-    bool is_palindrome();
+    MyString* slice(int start, int end, int step) const;
+    bool is_palindrome() const;
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "MyString.h"
 #include <cstring>
 
-MyString::MyString(char* input) {
+MyString::MyString(const char* input) {
     data = new char[strlen(input) + 1];
     strcpy(data, input);
 }
@@ -10,19 +10,20 @@ MyString::~MyString() {
     delete[] data;
 }
 
+char *MyString::get_data() const {
+    return data;
+}
+
 int MyString::length() const {
     return strlen(data);
 }
 
-MyString MyString::slice(int start, int end, int step) const {
+MyString* MyString::slice(int start, int end, int step) const {
     int len = length();
+    start = (start < 0) ? len + start : start;
     end = (end > len) ? len : end;
 
-    if (start < 0) {
-        start = len + start;
-    }
-
-    char* sliced_data = new char[(end - start + 1) / step + 1];
+    char* sliced_data = new char[len+1];
     int j = 0;
 
     for (int i = start; i < end; i += step) {
@@ -31,15 +32,12 @@ MyString MyString::slice(int start, int end, int step) const {
 
     sliced_data[j] = '\0';
 
-    MyString result(sliced_data);
-
-    // Free the memory allocated for sliced_data
+    MyString *sliced_string = new MyString(sliced_data);
     delete[] sliced_data;
-
-    return data;
+    return sliced_string;
 }
 
-bool MyString::is_palindrome() {
+bool MyString::is_palindrome() const {
     int len = strlen(data);
     for (int i = 0; i < len / 2; i++) {
         if (data[i] != data[len - i - 1]) {
